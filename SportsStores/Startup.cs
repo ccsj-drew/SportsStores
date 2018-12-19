@@ -15,18 +15,18 @@ namespace SportsStores
     public class Startup
     {
         public Startup(IConfiguration configuration) =>
-            configuration = configuration;
-        public IConfiguration configuration { get; }
+            Configuration = configuration;
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
-                configuration["Data:SportStoresProducts:ConnectionString"]));
-            services.AddTransient<IProductRepository, EFProductRespository>();
+                Configuration["Data:SportStoresProducts:ConnectionString"]));
+            services.AddTransient<IProductRepository, FakeProductRepository>();
+            //services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
         }
-
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -38,7 +38,7 @@ namespace SportsStores
                 routes.MapRoute(
                     name: "pagination",
                     template: "Products/Page{productPage}",
-                    defaults: new "{ Controller= "Product" , action= "List" });
+                    defaults: new { Controller = "Product", action = "List" });
 
                     routes.MapRoute(
                         name: "default",
