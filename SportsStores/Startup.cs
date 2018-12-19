@@ -20,9 +20,9 @@ namespace SportsStores
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-                Configuration["Data:SportStoresProducts:ConnectionString"]));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseSqlServer(
+            //    Configuration["Data:SportStoresProducts:ConnectionString"]));
             services.AddTransient<IProductRepository, FakeProductRepository>();
             //services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
@@ -35,17 +35,16 @@ namespace SportsStores
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "pagination",
-                    template: "Products/Page{productPage}",
-                    defaults: new { Controller = "Product", action = "List" });
+                //routes.MapRoute(
+                //    name: "pagination",
+                //    template: "Products/Page{productPage}",
+                //    defaults: new { Controller = "Product", action = "List" });
 
                     routes.MapRoute(
                         name: "default",
-                        template: "{controller=Product}/{action=List}/{id}");
-            
+                        template: "{controller=Product}/{action=List}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
         }
     }
 }
