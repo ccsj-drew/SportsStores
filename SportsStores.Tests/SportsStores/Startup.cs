@@ -12,38 +12,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SportsStores
 {
+
     public class Startup
     {
+
         public Startup(IConfiguration configuration) =>
-            configuration = configuration;
-        public IConfiguration configuration { get; }
+            Configuration = configuration;
+
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-                configuration["Data:SportStoresProducts:ConnectionString"]));
-            services.AddTransient<IProductRepository, EFProductRespository>();
+                options.UseSqlServer(
+                    Configuration["Data:SportStoreProducts:ConnectionString"]));
+            services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
         }
-
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "pagination",
                     template: "Products/Page{productPage}",
-                    defaults: new "{ Controller= "Product" , action= "List" });
+                    defaults: new { Controller = "Product", action = "List" });
 
-                    routes.MapRoute(
-                        name: "default",
-                        template: "{controller=Product}/{action=List}/{id}");
-            
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Product}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

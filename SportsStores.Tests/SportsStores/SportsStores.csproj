@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-	  <DotNetClitoolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" version="2.0.0" />				
-							
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+
   </ItemGroup>
 
 </Project>
