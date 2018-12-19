@@ -20,11 +20,11 @@ namespace SportsStores
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer(
-            //    Configuration["Data:SportStoresProducts:ConnectionString"]));
-            services.AddTransient<IProductRepository, FakeProductRepository>();
-            //services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(
+                Configuration["Data:SportsStoresProducts:ConnectionString"]));
+            //services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddMvc();
         }
 
@@ -44,7 +44,7 @@ namespace SportsStores
                         name: "default",
                         template: "{controller=Product}/{action=List}/{id?}");
             });
-            //SeedData.EnsurePopulated(app);
+            SeedData.EnsurePopulated(app);
         }
     }
 }
