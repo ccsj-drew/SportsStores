@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Product>
-@*@model ProductsListViewModel*@
+﻿
+@model ProductsListViewModel
 
-@foreach (var p in Model) { 
+@foreach (var p in Model.Products) { 
 <div>
     <h3>@p.Name</h3>
     @p.Description
@@ -9,9 +9,8 @@
 </div>
     @*@Html.Partial("ProductSummary", p)*@
 }
-@*<div page-model="@Model.PagingInfo" page-action="List" page classes-enabled="true"
-         page-class="btn-group" page-class-normal="btn-secondary"
-         page-class-selected="btn-peimary" class="btn-group pull-right m-1">
+<div page-model="@Model.PagingInfo" page-action=" List"></div>
+@*<div page-model="@Model.PagingInfo" page-action="List" 
 
     </div>
 
